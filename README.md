@@ -25,6 +25,24 @@ Let's say in a mobile game you want to show the current level on title screen, y
   - Attach `DataBinder` component to the `text-levelNumber`. (`DataBinder` is already available for you)
   - On `DataBinder` component set the `Target Property` to `UnityEngine.UI.Text.text` and `Source Value` to `TitleScreenUIModel.LevelNumber`. This will bind the text field in UI to the property in view model, now whenever that property will change we will see that in UI text.
   
+### Implementation Details
+Few points to note from the example listed above.
+- For a property to be binded from Unity Editor you must have to assign `[Bindable]` attribute to that property. Like `LevelNumber` property is using `[Bindable]` attribute.
+- Every Bindable property has to use the speical `Set` method defined in `ViewModelBase.cs`. Like  `LevelNumber` property is using this method in it's setter.
+
+``` 
+public class ViewModelBase : MonoBehaviour, INotifyPropertyChanged
+{
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public virtual void Set<T>(ref T target, T newValue, [CallerMemberName]string propertyName = "")
+    {
+        target = newValue;
+        PropertyChanged?.Invoke(target, new PropertyChangedEventArgs(propertyName));
+    }
+}
+```
+
 Couple of screenshots to further assist in understanding the working.
 
 **Sample scene setup and binding.**
@@ -32,3 +50,12 @@ Couple of screenshots to further assist in understanding the working.
 
 **Custom View Model from the above example**
 ![viewModel](https://user-images.githubusercontent.com/12896256/132950026-6eb4058a-5178-4901-bb58-2b836c5b5fb7.PNG)
+
+# FieldToPropertyAttribute
+Since binding works with the properties but Unity doesn't exopse properties to inspector which means we can't update view model property through editor. But with this attribute we can encapsulate fields through properties and bind those fields to property through this attribute which will call setter on the property whenever that field is updated through editor.
+
+![attrib](https://user-images.githubusercontent.com/12896256/132950895-6194fd70-e548-431a-8e23-b43a74d2fc06.PNG)
+
+![attrib-gif](https://user-images.githubusercontent.com/12896256/132950905-6dd38bab-6a48-4228-8a93-c9bfcf742fdd.gif)
+
+
