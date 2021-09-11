@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TitleScreenUIModel : ViewModelBase
 {
-    [SerializeField, FieldToProperty("LevelNumber")] // Don't worry about this FieldToPropertyAttribute for now
+    [SerializeField, FieldToProperty("LevelNumber")]
     private string levelNumber;
 
     [Bindable]
