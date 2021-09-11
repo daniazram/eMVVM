@@ -1,9 +1,8 @@
 using UnityEngine;
-using System.Collections;
 
-public class TestModel : ViewModelBase
+public class TitleScreenUIModel : ViewModelBase
 {
-    [SerializeField, FieldToProperty("LevelNumber")]
+    [SerializeField, FieldToProperty("LevelNumber")] // Don't worry about this FieldToPropertyAttribute for now
     private string levelNumber;
 
     [Bindable]
