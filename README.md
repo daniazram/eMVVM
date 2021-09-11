@@ -23,7 +23,8 @@ Let's say in a mobile game you want to show the current level on title screen, y
   - Create a simple text (or TMPro text), place it appropriately in the UI. Name it `text-levelNumber`.
   - Attach `TitleScreenUIModel` component to the  `TitleScreenUI` object.
   - Attach `DataBinder` component to the `text-levelNumber`. (`DataBinder` is already available for you)
-  - On `DataBinder` component set the `Target Property` to `UnityEngine.UI.Text.text` and `Source Value` to `TitleScreenUIModel.LevelNumber`. This will bind the text field in UI to the property in view model, now whenever that property will change we will see that in UI text.
+  - On `DataBinder` component set the `Target Property` to `UnityEngine.UI.Text.text` and `Source Value` to `TitleScreenUIModel.LevelNumber`. This will bind the text field in UI to the property in view model, now whenever that property will change we will see that in UI text.  (You do this through Unity Editor as can be seen in one of the screenshots below)
+- Use your game logic to update the `TitleScreenUIModel`'s `LevelNumber` property and chagnes will automatically be reflected in the UI through binding you just did in the previous step.
   
 ### Implementation Details
 Few points to note from the example listed above.
